@@ -1,7 +1,4 @@
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Game {
     Scanner sc = new Scanner(System.in);
@@ -12,7 +9,7 @@ public class Game {
     //    private ArrayList<String> validGuesses = new ArrayList<String>();
 //    validGuesses.add()
     private final String[] validGuesses = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
-            "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+                                           "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
 
     boolean first_game = true;
 
