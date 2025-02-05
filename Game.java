@@ -3,18 +3,15 @@ import java.util.Scanner;
 public class Game {
     Scanner sc = new Scanner(System.in);
     WordProvider wordProvider = new WordProvider();
-
     private String secret;
     private int secretLength;
-    //    private ArrayList<String> validGuesses = new ArrayList<String>();
-//    validGuesses.add()
     private final String[] validGuesses = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
                                            "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
-
+    private int lives = 5;
     boolean first_game = true;
 
     /**
-     * Set the secret word and save its length.
+     * Set the secret word and saves its length.
      */
     public void setWord() {
         secret = wordProvider.getWord();
@@ -36,6 +33,9 @@ public class Game {
         }
     }
 
+    /**
+     * Lets the player make a guess. If the guess is invalid, prompts for another.
+     */
     public void makeGuess() {
         System.out.print("Enter your guess: ");
         String guess = sc.nextLine();
@@ -49,6 +49,11 @@ public class Game {
         }
     }
 
+    /**
+     * Checks whether the guess is valid.
+     * @param guess
+     * @return whether the guess is valid
+     */
     private boolean validateGuess(String guess) {
         int testsPassed = 0;
         if (guess.length() == secretLength) {
