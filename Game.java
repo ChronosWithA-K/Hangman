@@ -51,7 +51,7 @@ public class Game {
 
     /**
      * Checks whether the guess is valid.
-     * @param guess
+     * @param guess the guess the player makes
      * @return whether the guess is valid
      */
     private boolean validateGuess(String guess) {
