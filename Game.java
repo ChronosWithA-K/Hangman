@@ -60,15 +60,12 @@ public class Game {
             testsPassed++;
         }
 
-        for (int i = 0; i < validGuesses.length; i++) {
-            if (guess.equals(validGuesses[i])) {
+        for (String validGuess : validGuesses) {
+            if (guess.equals(validGuess)) {
                 testsPassed++;
                 break;
             }
         }
-        if (testsPassed == 2) {
-            return true;
-        }
-        return false;
+        return testsPassed == 2;
     }
 }
