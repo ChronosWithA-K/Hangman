@@ -1,13 +1,11 @@
 public class PlayGame {
     public static void main(String[] args) {
         Game game = new Game();
-        boolean playerWantsToPlay = true;
 
-        while (playerWantsToPlay) {
+        while (true) { // gameOver() method exits JVM if game not restarted, so this loop can be infinite
             game.setWord();
             game.displayStartInfo();
             game.makeGuess();
-            game.displayInfo();
         }
     }
 }

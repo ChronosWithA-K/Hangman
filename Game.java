@@ -1,12 +1,15 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
     Scanner sc = new Scanner(System.in);
     WordProvider wordProvider = new WordProvider();
+
     private String secret;
-    private int secretLength;
     private final String[] validGuesses = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
                                            "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+    private ArrayList<String> progress = new ArrayList<String>();
+    private ArrayList<String> guesses = new ArrayList<String>();
 
     private int lives = 6;
     private String hangState1 = """
@@ -69,11 +72,15 @@ public class Game {
     boolean first_game = true;
 
     /**
-     * Set the secret word and saves its length.
+     * Set the secret word and prepare progress.
      */
     public void setWord() {
         secret = wordProvider.getWord();
-        secretLength = secret.length();
+
+        // Fill the progress ArrayList with underscores equal to the amount of characters in the secret.
+        for (int i = 0; i < secret.length(); i++) {
+            progress.add("_");
+        }
     }
 
     /**
@@ -84,7 +91,7 @@ public class Game {
             System.out.println("This is a standard game of Hangman. You guess what letters are in a secret word, and I'll " +
                     "tell you whether or not the letter appears in the word. Your guess has to be a single letter. " +
                     "If your guess appears in the word, I'll show you where and how many times. If it doesn't, " +
-                    "you lose one of your guesses. Guess all the letters in the word to win.");
+                    "you lose one of your lives. Guess all the letters in the word to win.");
             first_game = false;
         } else {
             System.out.println("I hope you have a fun time playing!");
@@ -106,26 +113,31 @@ public class Game {
         }
 
         if (secret.contains(guess)) {
-            displayInfo();
+            System.out.println(guess + " was in the word!");
         } else {
             System.out.println("Incorrect guess.");
             lives--;
         }
+
+        // Change progress
+        ArrayList<Integer> guessIndices = new ArrayList<Integer>();
+
+        displayInfo();
     }
 
     /**
      * Checks whether the guess is valid.
-     * @param guess the guess the player makes
+     * @param g the guess the player makes
      * @return whether the guess is valid
      */
-    private boolean validateGuess(String guess) {
+    private boolean validateGuess(String g) {
         int testsPassed = 0;
-        if (guess.length() == secretLength) {
+        if (g.length() == secret.length()) {
             testsPassed++;
         }
 
         for (String validGuess : validGuesses) {
-            if (guess.equals(validGuess)) {
+            if (g.equals(validGuess)) {
                 testsPassed++;
                 break;
             }
@@ -136,7 +148,8 @@ public class Game {
     /**
      * Displays how far along the hanging has progressed, and the progress in guessing the secret.
      */
-    public void displayInfo() {
+    private void displayInfo() {
+        // Print hang states
         if (lives == 6) {
             System.out.println(hangState1);
         } else if (lives == 5) {
@@ -151,8 +164,40 @@ public class Game {
             System.out.println(hangState6);
         } else {
             System.out.println(hangState7);
+            gameOver();
         }
 
+        // Print guessed letters
+        System.out.print("Guessed letters: ");
+        for (String str : guesses) {
+            System.out.print(str + " ");
+        }
+        System.out.println();
 
+        // Print secret progress
+        System.out.print("Progress: ");
+        for (String str : progress) {
+            System.out.print(str);
+        }
+        System.out.println();
+    }
+
+    private void gameOver() {
+        System.out.println("You ran out of lives. The secret was " + secret);
+        System.out.println("Do you want to play again? (Y/N)");
+        String answer = sc.nextLine().toLowerCase();
+        boolean responseValid = false;
+
+        while (!responseValid) {
+            if (answer.equals("n") || answer.equals("y")) {
+                responseValid = true;
+
+                if (answer.equals("n")) {
+                    System.exit(0);
+                }
+            } else {
+                System.out.println("That wasn't a valid option. Do you want to play again? (Y/N)");
+            }
+        }
     }
 }
