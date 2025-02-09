@@ -6,13 +6,13 @@ public class Game {
     WordProvider wordProvider = new WordProvider();
 
     private String secret;
-    private final String[] validGuesses = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
+    private final String[] VALID_GUESSES = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
                                            "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
     private ArrayList<String> progress = new ArrayList<String>();
     private ArrayList<String> guesses = new ArrayList<String>();
 
     private int lives = 6;
-    private String hangState1 = """
+    private final String HANG_STATE_1 = """
             +--+
                |  |
                   |
@@ -20,7 +20,7 @@ public class Game {
                   |
                   |
               =====""";
-    private String hangState2 = """
+    private String HANG_STATE_2 = """
               +--+
               |  |
               O  |
@@ -28,7 +28,7 @@ public class Game {
                  |
                  |
              =====""";
-    private String hangState3 = """
+    private String HANG_STATE_3 = """
               +--+
               |  |
               O  |
@@ -36,7 +36,7 @@ public class Game {
                  |
                  |
              =====""";
-    private String hangState4 = """
+    private String HANG_STATE_4 = """
               +--+
               |  |
               O  |
@@ -44,7 +44,7 @@ public class Game {
                  |
                  |
              =====""";
-    private String hangState5 = """
+    private String HANG_STATE_5 = """
               +--+
               |  |
               O  |
@@ -52,7 +52,7 @@ public class Game {
                  |
                  |
              =====""";
-    private String hangState6 = """
+    private String HANG_STATE_6 = """
               +--+
               |  |
               O  |
@@ -60,7 +60,7 @@ public class Game {
              /   |
                  |
              =====""";
-    private String hangState7 = """
+    private String HANG_STATE_7 = """
               +--+
               |  |
               O  |
@@ -136,7 +136,7 @@ public class Game {
             testsPassed++;
         }
 
-        for (String validGuess : validGuesses) {
+        for (String validGuess : VALID_GUESSES) {
             if (g.equals(validGuess)) {
                 testsPassed++;
                 break;
@@ -151,19 +151,19 @@ public class Game {
     private void displayInfo() {
         // Print hang states
         if (lives == 6) {
-            System.out.println(hangState1);
+            System.out.println(HANG_STATE_1);
         } else if (lives == 5) {
-            System.out.println(hangState2);
+            System.out.println(HANG_STATE_2);
         } else if (lives == 4) {
-            System.out.println(hangState3);
+            System.out.println(HANG_STATE_3);
         } else if (lives == 3) {
-            System.out.println(hangState4);
+            System.out.println(HANG_STATE_4);
         } else if (lives == 2) {
-            System.out.println(hangState5);
+            System.out.println(HANG_STATE_5);
         } else if (lives == 1) {
-            System.out.println(hangState6);
+            System.out.println(HANG_STATE_6);
         } else {
-            System.out.println(hangState7);
+            System.out.println(HANG_STATE_7);
             gameOver();
         }
 
