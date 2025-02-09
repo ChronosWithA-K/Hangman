@@ -9,13 +9,62 @@ public class Game {
                                            "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
 
     private int lives = 6;
-    private String hangState1; // Empty noose
-    private String hangState2;
-    private String hangState3;
-    private String hangState4;
-    private String hangState5;
-    private String hangState6;
-    private String hangState7; // Fully hung
+    private String hangState1 = """
+            +--+
+               |  |
+                  |
+                  |
+                  |
+                  |
+              =====""";
+    private String hangState2 = """
+              +--+
+              |  |
+              O  |
+                 |
+                 |
+                 |
+             =====""";
+    private String hangState3 = """
+              +--+
+              |  |
+              O  |
+              |  |
+                 |
+                 |
+             =====""";
+    private String hangState4 = """
+              +--+
+              |  |
+              O  |
+             /|  |
+                 |
+                 |
+             =====""";
+    private String hangState5 = """
+              +--+
+              |  |
+              O  |
+             /|\\ |
+                 |
+                 |
+             =====""";
+    private String hangState6 = """
+              +--+
+              |  |
+              O  |
+             /|\\ |
+             /   |
+                 |
+             =====""";
+    private String hangState7 = """
+              +--+
+              |  |
+              O  |
+             /|\\ |
+             / \\ |
+                 |
+             =====""";
 
     boolean first_game = true;
 

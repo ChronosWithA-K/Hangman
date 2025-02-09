@@ -7,6 +7,7 @@ public class PlayGame {
             game.setWord();
             game.displayStartInfo();
             game.makeGuess();
+            game.displayInfo();
         }
     }
 }
