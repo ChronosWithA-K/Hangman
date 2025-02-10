@@ -1,3 +1,4 @@
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,7 +9,7 @@ public class Game {
     private String secret;
     private final String[] VALID_GUESSES = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
                                            "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
-    private ArrayList<String> progress = new ArrayList<String>();
+    private String progress;
     private ArrayList<String> guesses = new ArrayList<String>();
 
     private int lives = 6;
@@ -77,9 +78,10 @@ public class Game {
     public void setWord() {
         secret = wordProvider.getWord();
 
-        // Fill the progress ArrayList with underscores equal to the amount of characters in the secret.
+        // Fill the progress String with underscores equal to the amount of characters in the secret.
+        progress = ""; // Reset progress
         for (int i = 0; i < secret.length(); i++) {
-            progress.add("_");
+            progress += "_";
         }
     }
 
@@ -109,26 +111,33 @@ public class Game {
         while (!guessValid) {
             if (validateGuess(guess)) {
                 guessValid = true;
+            } else {
+                System.out.println("Sorry, that guess is not valid. Try again.");
+                guess = sc.nextLine().toLowerCase();
             }
         }
 
         if (secret.contains(guess)) {
             System.out.println(guess + " was in the word!");
+
+            // Replace the necessary underscores in the progress string with the guess
+            for (int i = 0; i < secret.length() - 1; i++) {
+                if (secret.substring(i, i + 1).equals(guess)) {
+                    progress = progress.replace(progress.substring(i, i + 1), guess);
+                }
+            }
         } else {
             System.out.println("Incorrect guess.");
             lives--;
         }
-
-        // Change progress
-        ArrayList<Integer> guessIndices = new ArrayList<Integer>();
 
         displayInfo();
     }
 
     /**
      * Checks whether the guess is valid.
-     * @param g the guess the player makes
-     * @return whether the guess is valid
+     * @param g the guess the player makes.
+     * @return whether the guess is valid.
      */
     private boolean validateGuess(String g) {
         int testsPassed = 0;
@@ -174,14 +183,12 @@ public class Game {
         }
         System.out.println();
 
-        // Print secret progress
-        System.out.print("Progress: ");
-        for (String str : progress) {
-            System.out.print(str);
-        }
-        System.out.println();
+        System.out.print("Progress: " + progress);
     }
 
+    /**
+     * Tells the player they lost, asks if they want to play again.
+     */
     private void gameOver() {
         System.out.println("You ran out of lives. The secret was " + secret);
         System.out.println("Do you want to play again? (Y/N)");
