@@ -7,7 +7,7 @@ public class Game {
 
     private String secret;
     private final String[] VALID_GUESSES = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
-                                           "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+            "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
     private String progress;
     private ArrayList<String> guesses = new ArrayList<String>();
 
@@ -21,53 +21,53 @@ public class Game {
                   |
               =====""";
     private String HANG_STATE_2 = """
-              +--+
-              |  |
-              O  |
-                 |
-                 |
-                 |
-             =====""";
+             +--+
+             |  |
+             O  |
+                |
+                |
+                |
+            =====""";
     private String HANG_STATE_3 = """
-              +--+
-              |  |
-              O  |
-              |  |
-                 |
-                 |
-             =====""";
+             +--+
+             |  |
+             O  |
+             |  |
+                |
+                |
+            =====""";
     private String HANG_STATE_4 = """
-              +--+
-              |  |
-              O  |
-             /|  |
-                 |
-                 |
-             =====""";
+             +--+
+             |  |
+             O  |
+            /|  |
+                |
+                |
+            =====""";
     private String HANG_STATE_5 = """
-              +--+
-              |  |
-              O  |
-             /|\\ |
-                 |
-                 |
-             =====""";
+             +--+
+             |  |
+             O  |
+            /|\\ |
+                |
+                |
+            =====""";
     private String HANG_STATE_6 = """
-              +--+
-              |  |
-              O  |
-             /|\\ |
-             /   |
-                 |
-             =====""";
+             +--+
+             |  |
+             O  |
+            /|\\ |
+            /   |
+                |
+            =====""";
     private String HANG_STATE_7 = """
-              +--+
-              |  |
-              O  |
-             /|\\ |
-             / \\ |
-                 |
-             =====""";
+             +--+
+             |  |
+             O  |
+            /|\\ |
+            / \\ |
+                |
+            =====""";
 
     boolean first_game = true;
 
@@ -88,15 +88,10 @@ public class Game {
      * Display info that the player should see when playing the game for the first time or when replaying.
      */
     public void displayStartInfo() {
-        if (first_game) {
-            System.out.println("This is a standard game of Hangman. You guess what letters are in a secret word, and I'll " +
-                    "tell you whether or not the letter appears in the word. Your guess has to be a single letter. " +
-                    "If your guess appears in the word, I'll show you where and how many times. If it doesn't, " +
-                    "you lose one of your lives. Guess all the letters in the word to win.");
-            first_game = false;
-        } else {
-            System.out.println("I hope you have a fun time playing!");
-        }
+        System.out.println("This is a standard game of Hangman. You guess what letters are in a secret word, and I'll " +
+                "tell you whether or not the letter appears in the word. Your guess has to be a single letter. " +
+                "If your guess appears in the word, I'll show you where and how many times. If it doesn't, " +
+                "you lose one of your lives. Guess all the letters in the word to win.");
     }
 
     /**
@@ -135,6 +130,7 @@ public class Game {
 
     /**
      * Checks whether the guess is valid.
+     *
      * @param g the guess the player makes.
      * @return whether the guess is valid.
      */
