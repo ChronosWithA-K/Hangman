@@ -140,18 +140,12 @@ public class Game {
      * @return whether the guess is valid.
      */
     private boolean validateGuess(String g) {
-        int testsPassed = 0;
-        if (g.length() == secret.length()) {
-            testsPassed++;
-        }
-
         for (String validGuess : VALID_GUESSES) {
             if (g.equals(validGuess)) {
-                testsPassed++;
-                break;
+                return true;
             }
         }
-        return testsPassed == 2;
+        return false;
     }
 
     /**
