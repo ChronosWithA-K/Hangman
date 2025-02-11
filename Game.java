@@ -168,7 +168,7 @@ public class Game {
         // Print guessed letters
         System.out.print("Guessed letters: ");
         for (String str : guesses) {
-            System.out.print(str + " ");
+            System.out.print(str + ", ");
         }
         System.out.println();
 
