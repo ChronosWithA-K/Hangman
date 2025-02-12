@@ -69,8 +69,6 @@ public class Game {
                 |
             =====""";
 
-    boolean first_game = true;
-
     /**
      * Set the secret word and prepare progress.
      */
@@ -105,6 +103,7 @@ public class Game {
         while (!guessValid) {
             if (validateGuess(guess)) {
                 guessValid = true;
+                guesses.add(guess);
             } else {
                 System.out.println("Sorry, that guess is not valid. Try again.");
                 guess = sc.nextLine().toLowerCase();
@@ -117,7 +116,7 @@ public class Game {
             // Replace the necessary underscores in the progress string with the guess
             for (int i = 0; i < secret.length() - 1; i++) {
                 if (secret.substring(i, i + 1).equals(guess)) {
-                    progress = progress.replace(progress.substring(i, i + 1), guess);
+                    progress = progress.replace(progress.substring(i, i + 1), guess); // Fills entire progress string with the guess
                 }
             }
         } else {
@@ -172,7 +171,7 @@ public class Game {
         }
         System.out.println();
 
-        System.out.print("Progress: " + progress);
+        System.out.print("Progress: " + progress + "\n");
     }
 
     /**
