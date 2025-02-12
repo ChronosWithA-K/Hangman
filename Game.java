@@ -119,6 +119,10 @@ public class Game {
                     progress = progress.replace(progress.substring(i, i + 1), guess); // Fills entire progress string with the guess
                 }
             }
+
+            if (checkIfWordDiscovered()) {
+                gameOver();
+            }
         } else {
             System.out.println("Incorrect guess.");
             lives--;
@@ -176,23 +180,42 @@ public class Game {
 
     /**
      * Tells the player they lost, asks if they want to play again.
+     *
      */
     private void gameOver() {
-        System.out.println("You ran out of lives. The secret was " + secret);
-        System.out.println("Do you want to play again? (Y/N)");
-        String answer = sc.nextLine().toLowerCase();
+        String answer;
         boolean responseValid = false;
 
+        if (lives == 0) {
+            System.out.println("You ran out of lives. The secret was " + secret);
+            System.out.println("Do you want to play again? (Y/N)");
+
+        } else { // Method only ever gets called if no lives left or if the game was won, so no other condition is needed
+            System.out.println("You won! Do you want to play again? (Y/N)");
+
+        }
+        answer = sc.nextLine().toLowerCase();
+        responseValid = false;
         while (!responseValid) {
             if (answer.equals("n") || answer.equals("y")) {
                 responseValid = true;
 
                 if (answer.equals("n")) {
                     System.exit(0);
+                } else {
+                    setWord();
                 }
             } else {
                 System.out.println("That wasn't a valid option. Do you want to play again? (Y/N)");
             }
         }
+    }
+
+    public void debug() {
+        System.out.println("The secret is: " + secret);
+    }
+
+    private boolean checkIfWordDiscovered() {
+        return progress.equals(secret);
     }
 }
