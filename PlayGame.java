@@ -6,8 +6,8 @@ public class PlayGame {
         game.setWord();
 
         while (true) { // gameOver() method in Game.java exits JVM if game not restarted, so this loop can be infinite
-            game.makeGuess();
             game.debug();
+            game.makeGuess();
         }
     }
 }

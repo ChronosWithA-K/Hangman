@@ -13,7 +13,7 @@ public class Game {
 
     private int lives = 6;
     private final String HANG_STATE_1 = """
-            +--+
+               +--+
                |  |
                   |
                   |
