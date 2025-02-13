@@ -204,6 +204,7 @@ public class Game {
                     System.exit(0);
                 } else {
                     setWord();
+                    lives = 6;
                 }
             } else {
                 System.out.println("That wasn't a valid option. Do you want to play again? (Y/N)");
