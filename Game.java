@@ -86,6 +86,7 @@ public class Game {
      * Display info that the player should see when playing the game for the first time or when replaying.
      */
     public void displayStartInfo() {
+        // "\n"s are added to make it look nice for InteliJ, which makes it look weird in VS Code
         System.out.println("\nThis is a standard game of Hangman. You guess what letters are in a secret word, and I'll " +
                 "tell you whether or not the letter appears in the word. Your guess has to be a single letter. " +
                 "If your guess appears in the word, I'll show you where and how many times. If it doesn't, " +
@@ -205,6 +206,7 @@ public class Game {
                 } else {
                     setWord();
                     lives = 6;
+                    guesses.clear();
                 }
             } else {
                 System.out.println("That wasn't a valid option. Do you want to play again? (Y/N)");
