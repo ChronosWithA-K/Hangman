@@ -105,7 +105,7 @@ public class Game {
                 guessValid = true;
                 guesses.add(guess);
             } else {
-                System.out.println("Sorry, that guess is not valid. Try again.");
+                System.out.println("Sorry, that guess is not valid. Try again: ");
                 guess = sc.nextLine().toLowerCase();
             }
         }
@@ -114,7 +114,7 @@ public class Game {
             System.out.println(guess + " was in the word!");
 
             // Replace the necessary underscores in the progress string with the guess
-            for (int i = 0; i < secret.length() - 1; i++) {
+            for (int i = 0; i < secret.length(); i++) {
                 if (secret.substring(i, i + 1).equals(guess)) {
                     progress.setCharAt(i, guess.charAt(0)); // charAt() can be 0 because it's a single char string
                 }
