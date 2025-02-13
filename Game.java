@@ -139,7 +139,7 @@ public class Game {
      */
     private boolean validateGuess(String g) {
         for (String validGuess : VALID_GUESSES) {
-            if (g.equals(validGuess)) {
+            if (g.equals(validGuess) && !(guesses.contains(g))) {
                 return true;
             }
         }
