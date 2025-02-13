@@ -86,10 +86,10 @@ public class Game {
      * Display info that the player should see when playing the game for the first time or when replaying.
      */
     public void displayStartInfo() {
-        System.out.println("This is a standard game of Hangman. You guess what letters are in a secret word, and I'll " +
+        System.out.println("\nThis is a standard game of Hangman. You guess what letters are in a secret word, and I'll " +
                 "tell you whether or not the letter appears in the word. Your guess has to be a single letter. " +
                 "If your guess appears in the word, I'll show you where and how many times. If it doesn't, " +
-                "you lose one of your lives. Guess all the letters in the word to win.");
+                "you lose one of your\nlives. Guess all the letters in the word to win.\n");
     }
 
     /**
