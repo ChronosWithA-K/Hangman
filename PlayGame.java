@@ -8,6 +8,8 @@ public class PlayGame {
         while (true) { // gameOver() method in Game.java exits JVM if game not restarted, so this loop can be infinite
             game.debug();
             game.makeGuess();
+            game.win();
+            game.lose();
         }
     }
 }

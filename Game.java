@@ -20,7 +20,7 @@ public class Game {
                   |
                   |
               =====""";
-    private String HANG_STATE_2 = """
+    private final String HANG_STATE_2 = """
              +--+
              |  |
              O  |
@@ -28,7 +28,7 @@ public class Game {
                 |
                 |
             =====""";
-    private String HANG_STATE_3 = """
+    private final String HANG_STATE_3 = """
              +--+
              |  |
              O  |
@@ -36,7 +36,7 @@ public class Game {
                 |
                 |
             =====""";
-    private String HANG_STATE_4 = """
+    private final String HANG_STATE_4 = """
              +--+
              |  |
              O  |
@@ -44,7 +44,7 @@ public class Game {
                 |
                 |
             =====""";
-    private String HANG_STATE_5 = """
+    private final String HANG_STATE_5 = """
              +--+
              |  |
              O  |
@@ -52,7 +52,7 @@ public class Game {
                 |
                 |
             =====""";
-    private String HANG_STATE_6 = """
+    private final String HANG_STATE_6 = """
              +--+
              |  |
              O  |
@@ -60,7 +60,7 @@ public class Game {
             /   |
                 |
             =====""";
-    private String HANG_STATE_7 = """
+    private final String HANG_STATE_7 = """
              +--+
              |  |
              O  |
@@ -119,10 +119,6 @@ public class Game {
                     progress.setCharAt(i, guess.charAt(0)); // charAt() can be 0 because it's a single char string
                 }
             }
-
-            if (checkIfWordDiscovered()) {
-                gameOver();
-            }
         } else {
             System.out.println("Incorrect guess.");
             lives--;
@@ -147,25 +143,38 @@ public class Game {
     }
 
     /**
+     * Tells the player they lost, asks if they want to replay
+     */
+    public void lose() {
+        if (lives == 0) {
+            System.out.println("You hung yourself. The secret was " + secret);
+            checkIfPlayAgain();
+        }
+    }
+
+    /**
+     * Tells the player they won, asks if they want to replay
+     */
+    public void win() {
+        if (progress.toString().equals(secret)) {
+            System.out.println("You won!");
+            checkIfPlayAgain();
+        }
+    }
+
+    /**
      * Displays how far along the hanging has progressed, and the progress in guessing the secret.
      */
     private void displayInfo() {
         // Print hang states
-        if (lives == 6) {
-            System.out.println(HANG_STATE_1);
-        } else if (lives == 5) {
-            System.out.println(HANG_STATE_2);
-        } else if (lives == 4) {
-            System.out.println(HANG_STATE_3);
-        } else if (lives == 3) {
-            System.out.println(HANG_STATE_4);
-        } else if (lives == 2) {
-            System.out.println(HANG_STATE_5);
-        } else if (lives == 1) {
-            System.out.println(HANG_STATE_6);
-        } else {
-            System.out.println(HANG_STATE_7);
-            gameOver();
+        switch (lives) {
+            case 6 -> System.out.println(HANG_STATE_1);
+            case 5 -> System.out.println(HANG_STATE_2);
+            case 4 -> System.out.println(HANG_STATE_3);
+            case 3 -> System.out.println(HANG_STATE_4);
+            case 2 -> System.out.println(HANG_STATE_5);
+            case 1 -> System.out.println(HANG_STATE_6);
+            default -> System.out.println(HANG_STATE_7);
         }
 
         // Print guessed letters
@@ -179,23 +188,14 @@ public class Game {
     }
 
     /**
-     * Tells the player they lost, asks if they want to play again.
-     *
+     * Asks the player if they want to play again.
      */
-    private void gameOver() {
+    private void checkIfPlayAgain() {
         String answer;
         boolean responseValid = false;
+        System.out.println("Do you want to play again? (Y/N)");
 
-        if (lives == 0) {
-            System.out.println("You ran out of lives. The secret was " + secret);
-            System.out.println("Do you want to play again? (Y/N)");
-
-        } else { // Method only ever gets called if no lives left or if the game was won, so no other condition is needed
-            System.out.println("You won! Do you want to play again? (Y/N)");
-
-        }
         answer = sc.nextLine().toLowerCase();
-        responseValid = false;
         while (!responseValid) {
             if (answer.equals("n") || answer.equals("y")) {
                 responseValid = true;
@@ -213,9 +213,5 @@ public class Game {
 
     public void debug() {
         System.out.println("The secret is: " + secret);
-    }
-
-    private boolean checkIfWordDiscovered() {
-        return progress.equals(secret);
     }
 }
