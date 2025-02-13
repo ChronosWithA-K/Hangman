@@ -207,6 +207,8 @@ public class Game {
                 }
             } else {
                 System.out.println("That wasn't a valid option. Do you want to play again? (Y/N)");
+                answer = sc.nextLine();
+                System.out.println("test");
             }
         }
     }
