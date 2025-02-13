@@ -8,7 +8,7 @@ public class Game {
     private String secret;
     private final String[] VALID_GUESSES = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
             "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
-    private String progress;
+    private StringBuilder progress = new StringBuilder();
     private ArrayList<String> guesses = new ArrayList<String>();
 
     private int lives = 6;
@@ -76,9 +76,9 @@ public class Game {
         secret = wordProvider.getWord();
 
         // Fill the progress String with underscores equal to the amount of characters in the secret.
-        progress = ""; // Reset progress
+        progress = new StringBuilder(""); // Reset progress
         for (int i = 0; i < secret.length(); i++) {
-            progress += "_";
+            progress.append("_");
         }
     }
 
@@ -116,7 +116,7 @@ public class Game {
             // Replace the necessary underscores in the progress string with the guess
             for (int i = 0; i < secret.length() - 1; i++) {
                 if (secret.substring(i, i + 1).equals(guess)) {
-                    progress = progress.replace(progress.substring(i, i + 1), guess); // Fills entire progress string with the guess
+                    progress.setCharAt(i, guess.charAt(0)); // charAt() can be 0 because it's a single char string
                 }
             }
 
