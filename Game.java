@@ -212,6 +212,9 @@ public class Game {
         }
     }
 
+    /**
+     * Print the secret
+     */
     public void debug() {
         System.out.println("The secret is: " + secret);
     }
